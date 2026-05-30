@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (toggleLangBtn) {
     toggleLangBtn.addEventListener('click', () => {
-      document.body.classList.toggle('lang-is-id');
+      // Toggle class is handled by the inline V1.1-DY Offline tracking script block
       const isIndonesian = document.body.classList.contains('lang-is-id');
       localStorage.setItem('dy_portfolio_lang', isIndonesian ? 'id' : 'en');
       updateDynamicElements();
@@ -303,6 +303,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   pricingBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.classList.contains('btn-trigger-tracking')) {
+        return; // Handled by offline tracking script block to avoid double-opening WhatsApp
+      }
       const packageName = btn.getAttribute('data-package');
       
       if (!packageName) return;
