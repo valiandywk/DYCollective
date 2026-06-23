@@ -1,5 +1,5 @@
 /* 
-   Yos Valiandy Portfolio Overhaul | Premium Performance Edition v12.0
+   DYCollective Portfolio Overhaul | Premium Performance Edition v12.0
    Design Philosophy: Apple/Stripe Minimalist Cyber-Dark Mode
 */
 
@@ -7,21 +7,21 @@
 
 /* CSS Variables & Tokens */
 :root {
-  --bg-ink-black: #03060E;
-  --bg-obsidian-grey: #0F131E;
-  --bg-obsidian-light: #161C2C;
-  --accent-growth-green: #10B981; /* Premium Emerald */
-  --accent-growth-green-hover: #059669;
-  --accent-growth-green-rgb: 16, 185, 129;
-  --accent-tech-blue: #3B82F6; /* Electric Blue */
-  --accent-tech-blue-hover: #2563EB;
-  --accent-tech-blue-rgb: 59, 130, 246;
-  --accent-orange: #F97316; /* Brand Orange */
+  --bg-ink-black: #050814; /* Deep Navy Blue background matching official logo */
+  --bg-obsidian-grey: #0C1126; /* Card background */
+  --bg-obsidian-light: #131A39; /* Card hover background */
+  --accent-growth-green: #2563EB; /* Vibrant Brand Blue (Primary Accent matching logo) */
+  --accent-growth-green-hover: #1D4ED8;
+  --accent-growth-green-rgb: 37, 99, 235;
+  --accent-tech-blue: #9DB2CE; /* Elegant Slate Blue from logo text (Secondary Accent) */
+  --accent-tech-blue-hover: #7E95B3;
+  --accent-tech-blue-rgb: 157, 178, 206;
+  --accent-orange: #3B82F6; /* Lighter Blue Accent */
   --text-light: #F8FAFC;
   --text-muted: #94A3B8;
   --border-color: rgba(255, 255, 255, 0.05);
-  --border-color-glow: rgba(16, 185, 129, 0.15);
-  --border-color-blue: rgba(59, 130, 246, 0.15);
+  --border-color-glow: rgba(37, 99, 235, 0.15);
+  --border-color-blue: rgba(157, 178, 206, 0.15);
   
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -72,8 +72,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   position: relative;
-  background-color: #03060E;
-  background-image: radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.12) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%);
+  background-color: var(--bg-ink-black);
+  background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.12) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(157, 178, 206, 0.12) 0px, transparent 50%);
   background-attachment: fixed;
   color: #F8FAFC;
   font-family: 'Inter', sans-serif;
@@ -97,7 +97,7 @@ body.lang-is-id span.lang-id, body.lang-is-id a.lang-id, body.lang-is-id strong.
   width: 40vw;
   height: 40vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, rgba(0,0,0,0) 70%);
   filter: blur(80px);
   animation: floatOrb 25s infinite alternate ease-in-out;
   z-index: -1;
@@ -240,12 +240,12 @@ header.scrolled nav {
   height: 45px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: drop-shadow(0px 0px 8px rgba(37, 99, 235, 0.1));
   transition: all 0.3s ease;
 }
 
 .brand-logo-final:hover {
-  filter: brightness(0) invert(1) drop-shadow(0px 0px 15px rgba(249, 115, 22, 0.6));
+  filter: drop-shadow(0px 0px 15px rgba(37, 99, 235, 0.5));
   transform: scale(1.05);
 }
 

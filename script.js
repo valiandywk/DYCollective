@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fabText = isIndonesian
         ? 'Halo DYCollective, saya ingin berkonsultasi mengenai strategi Performance Marketing untuk bisnis saya.'
         : 'Hi DY Collective, I would like to schedule a strategy consultation for my business.';
-      whatsappFab.href = `https://api.whatsapp.com/send?phone=6287887046946&text=${encodeURIComponent(fabText)}`;
+      whatsappFab.href = `https://api.whatsapp.com/send?phone=6287787310526&text=${encodeURIComponent(fabText)}`;
     }
   }
 
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         textMessage = `Hi DY Collective, I am interested in the *(${packageName})* package and would like to schedule a Performance Marketing consultation.`;
       }
       
-      window.open(`https://api.whatsapp.com/send?phone=6287887046946&text=${encodeURIComponent(textMessage)}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=6287787310526&text=${encodeURIComponent(textMessage)}`, '_blank');
     });
   });
 
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
       textMsg = `Hi DY Collective, I am *(${nama})* from *(${bisnis})* and would like to schedule a strategy consultation. Currently, my monthly ad budget is in the *(${budget})* range.`;
     }
     
-    window.open(`https://api.whatsapp.com/send?phone=6287887046946&text=${encodeURIComponent(textMsg)}`);
+    window.open(`https://api.whatsapp.com/send?phone=6287787310526&text=${encodeURIComponent(textMsg)}`);
   });
 
 });
