@@ -86,18 +86,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile menu burger toggle
-  burgerMenu.addEventListener('click', () => {
-    burgerMenu.classList.toggle('active');
-    navLinks.classList.toggle('active');
+  // Mobile menu staggered drawer toggle
+  const smPanel = document.getElementById('staggered-menu-panel');
+  const smPrelayers = document.querySelector('.sm-prelayers');
+  const smPanelItems = document.querySelectorAll('.sm-panel-item');
+
+  if (burgerMenu) {
+    burgerMenu.addEventListener('click', () => {
+      const isActive = burgerMenu.classList.toggle('active');
+      burgerMenu.setAttribute('aria-expanded', isActive);
+      document.body.classList.toggle('menu-open', isActive);
+      if (smPanel) smPanel.classList.toggle('active', isActive);
+      if (smPrelayers) smPrelayers.classList.toggle('active', isActive);
+    });
+  }
+
+  // Close nav on staggered nav link click
+  smPanelItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (burgerMenu) {
+        burgerMenu.classList.remove('active');
+        burgerMenu.setAttribute('aria-expanded', 'false');
+      }
+      document.body.classList.remove('menu-open');
+      if (smPanel) smPanel.classList.remove('active');
+      if (smPrelayers) smPrelayers.classList.remove('active');
+    });
   });
 
-  // Close nav on nav link click
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      burgerMenu.classList.remove('active');
-      navLinks.classList.remove('active');
-    });
+  // Close when clicking outside the panel
+  document.addEventListener('mousedown', (e) => {
+    if (burgerMenu && burgerMenu.classList.contains('active')) {
+      if (smPanel && !smPanel.contains(e.target) && !burgerMenu.contains(e.target)) {
+        burgerMenu.classList.remove('active');
+        burgerMenu.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+        if (smPanel) smPanel.classList.remove('active');
+        if (smPrelayers) smPrelayers.classList.remove('active');
+      }
+    }
   });
 
 

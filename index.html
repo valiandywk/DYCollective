@@ -160,13 +160,94 @@
           </a>
         </div>
         
-        <button class="burger-menu" id="burgerMenu" aria-label="Toggle Menu">
-          <span></span>
-          <span></span>
-          <span></span>
+        <!-- Toggle Button for Staggered Menu -->
+        <button class="sm-toggle" id="burgerMenu" aria-label="Toggle Menu" aria-expanded="false" aria-controls="staggered-menu-panel" type="button">
+          <span class="sm-toggle-textWrap" aria-hidden="true">
+            <span class="sm-toggle-textInner">
+              <span class="sm-toggle-line">MENU</span>
+              <span class="sm-toggle-line">CLOSE</span>
+            </span>
+          </span>
+          <span class="sm-icon" aria-hidden="true">
+            <span class="sm-icon-line"></span>
+            <span class="sm-icon-line sm-icon-line-v"></span>
+          </span>
         </button>
       </nav>
     </div>
+
+    <!-- Staggered Drawer Menu Prelayers & Panel -->
+    <div class="sm-prelayers" aria-hidden="true">
+      <div class="sm-prelayer sm-prelayer-1"></div>
+      <div class="sm-prelayer sm-prelayer-2"></div>
+    </div>
+    
+    <aside id="staggered-menu-panel" class="staggered-menu-panel" aria-hidden="true">
+      <div class="sm-panel-inner">
+        <ul class="sm-panel-list" role="list" data-numbering="true">
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item" href="#hero">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">Home</span>
+                <span class="lang-id">Beranda</span>
+              </span>
+            </a>
+          </li>
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item" href="#mastery">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">Expertise</span>
+                <span class="lang-id">Keahlian</span>
+              </span>
+            </a>
+          </li>
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item" href="#pricing">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">Pricing</span>
+                <span class="lang-id">Paket Harga</span>
+              </span>
+            </a>
+          </li>
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item" href="#certificates">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">Certifications</span>
+                <span class="lang-id">Sertifikasi</span>
+              </span>
+            </a>
+          </li>
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item" href="#faq">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">FAQ</span>
+                <span class="lang-id">FAQ</span>
+              </span>
+            </a>
+          </li>
+          <li class="sm-panel-itemWrap">
+            <a class="sm-panel-item nav-cta" href="#contact">
+              <span class="sm-panel-itemLabel">
+                <span class="lang-en">Consultation</span>
+                <span class="lang-id">Konsultasi</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+        
+        <div class="sm-socials" aria-label="Social links">
+          <h3 class="sm-socials-title">Socials</h3>
+          <ul class="sm-socials-list" role="list">
+            <li class="sm-socials-item">
+              <a href="https://www.instagram.com/dycollective.official/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="sm-socials-link">Instagram</a>
+            </li>
+            <li class="sm-socials-item">
+              <a href="https://api.whatsapp.com/send?phone=6287787310526" target="_blank" rel="noopener noreferrer" class="sm-socials-link">WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
   </header>
 
   <main>

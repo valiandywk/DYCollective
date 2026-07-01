@@ -249,42 +249,9 @@ header.scrolled nav {
   transform: scale(1.05);
 }
 
-/* Nav Links */
+/* Nav Links (Hidden globally in favor of Staggered Drawer Menu) */
 .nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-muted);
-  font-family: var(--font-heading);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color var(--transition-fast);
-  padding: 0.25rem 0;
-}
-
-.nav-links a:hover {
-  color: var(--text-light);
-}
-
-.nav-cta {
-  background: var(--accent-growth-green);
-  color: var(--bg-ink-black) !important;
-  padding: 0.6rem 1.5rem !important;
-  border-radius: 6px;
-  font-weight: 600 !important;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
-  transition: all var(--transition-fast) !important;
-}
-
-.nav-cta:hover {
-  background: var(--accent-growth-green-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  display: none !important;
 }
 
 /* Controls block containing Language Toggle and Social Icon */
@@ -292,8 +259,15 @@ header.scrolled nav {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-left: 1.5rem;
+  margin-left: auto; /* Push controls and toggler to the right side */
   z-index: 1001;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+body.menu-open .nav-controls {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .lang-toggle-btn {
@@ -355,22 +329,334 @@ body.lang-is-id .lang-toggle-btn span.lang-label.id {
   transform: scale(1.1);
 }
 
-/* Mobile Burger */
-.burger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  cursor: pointer;
-  background: none;
-  border: none;
+body.menu-open {
+  overflow: hidden;
 }
 
-.burger-menu span {
+/* Mobile Burger (Replaced by Staggered Menu Toggle) */
+.sm-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #f4f1eb;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 0.5rem;
+  z-index: 1100;
+  transition: color var(--transition-fast);
+  margin-left: 2rem; /* Spacing between Instagram icon and MENU button */
+}
+
+.sm-toggle-textWrap {
+  position: relative;
+  display: inline-block;
+  height: 1.2em;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.sm-toggle-textInner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sm-toggle-line {
   display: block;
-  width: 24px;
+  height: 1.2em;
+}
+
+.sm-toggle.active .sm-toggle-textInner {
+  transform: translateY(-50%);
+}
+
+.sm-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sm-icon-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
   height: 2px;
-  background-color: var(--text-light);
-  transition: all var(--transition-normal);
+  background: currentColor;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  transition: transform var(--transition-normal);
+}
+
+.sm-icon-line-v {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.sm-toggle.active {
+  color: #000000;
+}
+
+.sm-toggle.active .sm-icon {
+  transform: rotate(225deg);
+  color: #000000; /* Black close cross to match user screenshot */
+}
+
+body.menu-open .sm-toggle {
+  position: fixed;
+  top: 1.8rem;
+  right: 2.5rem; /* Align perfectly with drawer right padding */
+  margin-left: 0;
+  z-index: 1100;
+}
+
+/* Staggered Menu Prelayers */
+.sm-prelayers {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(280px, 38vw, 450px);
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1050;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.sm-prelayer-1 {
+  background: #B497CF; /* Light purple/lavender from staggered menu.txt */
+  z-index: 1;
+}
+
+.sm-prelayer-2 {
+  background: #fa610e; /* Orange accent color from user screenshot */
+  z-index: 2;
+}
+
+.sm-prelayers.active .sm-prelayer-1 {
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+.sm-prelayers.active .sm-prelayer-2 {
+  transform: translateX(0);
+  transition-delay: 0.08s;
+}
+
+.sm-prelayers:not(.active) .sm-prelayer-1 {
+  transform: translateX(100%);
+  transition-delay: 0.08s;
+}
+
+.sm-prelayers:not(.active) .sm-prelayer-2 {
+  transform: translateX(100%);
+  transition-delay: 0s;
+}
+
+/* Staggered Menu Panel */
+.staggered-menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: clamp(280px, 38vw, 450px);
+  height: 100vh;
+  background: white; /* Frosted white panel matching staggered menu.txt */
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 6.5rem 2.5rem 3rem 2.5rem;
+  overflow-y: auto;
+  z-index: 1052;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.staggered-menu-panel.active {
+  transform: translateX(0);
+  transition-delay: 0.16s;
+  pointer-events: auto;
+}
+
+.staggered-menu-panel:not(.active) {
+  transition-delay: 0s;
+}
+
+.sm-panel-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.sm-panel-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  counter-reset: smItem;
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.sm-panel-item {
+  position: relative;
+  display: block; /* Align numbers vertically by stretching items to 100% width */
+  width: 100%;
+  color: #000000;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.75rem; /* Larger font size closer to original 3.5rem */
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: -2px; /* Tight letter spacing from staggered menu.txt */
+  padding-right: 3rem;
+  transition: color 0.3s ease;
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  transform: translateY(140%) rotate(8deg);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left bottom;
+  will-change: transform;
+}
+
+.staggered-menu-panel.active .sm-panel-itemLabel {
+  transform: translateY(0) rotate(0);
+}
+
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(1) .sm-panel-itemLabel { transition-delay: 0.25s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(2) .sm-panel-itemLabel { transition-delay: 0.31s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(3) .sm-panel-itemLabel { transition-delay: 0.37s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(4) .sm-panel-itemLabel { transition-delay: 0.43s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(5) .sm-panel-itemLabel { transition-delay: 0.49s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(6) .sm-panel-itemLabel { transition-delay: 0.55s; }
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.15em;
+  right: 0; /* Aligned perfectly on the right edge */
+  font-size: 18px; /* Original 18px */
+  font-weight: 400;
+  color: #fa610e; /* Orange accent color from user screenshot */
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.staggered-menu-panel.active .sm-panel-item::after {
+  opacity: 0.5;
+  transform: translateY(0);
+}
+
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(1) .sm-panel-item::after { transition-delay: 0.35s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(2) .sm-panel-item::after { transition-delay: 0.41s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(3) .sm-panel-item::after { transition-delay: 0.47s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(4) .sm-panel-item::after { transition-delay: 0.53s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(5) .sm-panel-item::after { transition-delay: 0.59s; }
+.staggered-menu-panel.active .sm-panel-itemWrap:nth-child(6) .sm-panel-item::after { transition-delay: 0.65s; }
+
+.sm-panel-item:hover {
+  color: #fa610e; /* Highlight hovered menu link in orange */
+}
+
+/* Consultation link overrides inside panel to prevent dark color overrides */
+.staggered-menu-panel .sm-panel-item.nav-cta {
+  display: block;
+  width: 100%;
+  color: var(--text-light) !important;
+  border: 1px solid #fa610e !important;
+  background: #fa610e !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1.5rem !important;
+  text-align: center !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(250, 97, 14, 0.2) !important;
+  margin-top: 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.staggered-menu-panel .sm-panel-item.nav-cta:hover {
+  background: #d3510c !important;
+  color: var(--text-light) !important;
+  box-shadow: 0 6px 20px rgba(250, 97, 14, 0.35) !important;
+}
+
+.staggered-menu-panel .sm-panel-item.nav-cta::after {
+  display: none !important;
+}
+
+.sm-socials {
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.staggered-menu-panel.active .sm-socials {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.sm-socials-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fa610e; /* Use orange accent */
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.sm-socials-list {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.sm-socials-link {
+  color: #333; /* Dark gray for light background drawer */
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.sm-socials-link:hover {
+  color: #fa610e; /* Orange hover */
 }
 
 /* Sections Global styling */
@@ -1873,48 +2159,40 @@ footer {
     background: rgba(3, 6, 14, 0.9);
   }
 
-  .burger-menu {
+  .sm-toggle {
     display: flex;
+    margin-left: 0;
   }
 
   .nav-links {
-    position: fixed;
-    top: 5rem;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 5rem);
-    background: rgba(3, 6, 14, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    padding-bottom: 5rem;
-    transform: translateX(100%);
-    transition: transform var(--transition-normal);
-    border-top: 1px solid var(--border-color);
+    display: none !important;
   }
 
-  .nav-links.active {
-    transform: translateX(0);
+  /* Staggered Menu full viewport on mobile */
+  .staggered-menu-panel,
+  .sm-prelayers {
+    width: 100vw;
   }
 
-  header.scrolled .nav-links {
-    top: 4rem;
-    height: calc(100vh - 4rem);
+  /* Mobile adjustments for white staggered panel */
+  .staggered-menu-panel {
+    border-left: none; /* No border needed on full screen mobile */
+    padding: 6.5rem 1.5rem 3rem 1.5rem; /* Tighter padding for mobile drawer */
   }
 
-  .burger-menu.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  .sm-panel-item {
+    font-size: 2.25rem; /* Down from 2.75rem to prevent wrapping on tablet/mobile */
+    padding-right: 2.5rem;
   }
 
-  .burger-menu.active span:nth-child(2) {
-    opacity: 0;
+  body.menu-open .brand-logo-final {
+    filter: invert(1) brightness(0.2) drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.15)); /* Make logo dark so it is visible on white background drawer */
   }
 
-  .burger-menu.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  body.menu-open .sm-toggle {
+    color: #000000; /* Make CLOSE text dark on mobile white background drawer */
+    top: 2rem;
+    right: 1.5rem; /* Align to mobile drawer padding */
   }
 
   /* Hero Mobile Refinements */
@@ -2134,5 +2412,10 @@ footer {
   .btt-btn {
     bottom: 86px;
     right: 28px;
+  }
+
+  .sm-panel-item {
+    font-size: 1.85rem; /* Down from 2.25rem to prevent wrapping on very small screens */
+    padding-right: 2rem;
   }
 }
