@@ -3,28 +3,28 @@
    Design Philosophy: Apple/Stripe Minimalist Cyber-Dark Mode
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
 
 /* CSS Variables & Tokens */
 :root {
-  --bg-ink-black: #050814; /* Deep Navy Blue background matching official logo */
-  --bg-obsidian-grey: #0C1126; /* Card background */
-  --bg-obsidian-light: #131A39; /* Card hover background */
-  --accent-growth-green: #2563EB; /* Vibrant Brand Blue (Primary Accent matching logo) */
-  --accent-growth-green-hover: #1D4ED8;
-  --accent-growth-green-rgb: 37, 99, 235;
-  --accent-tech-blue: #9DB2CE; /* Elegant Slate Blue from logo text (Secondary Accent) */
-  --accent-tech-blue-hover: #7E95B3;
-  --accent-tech-blue-rgb: 157, 178, 206;
-  --accent-orange: #3B82F6; /* Lighter Blue Accent */
-  --text-light: #F8FAFC;
-  --text-muted: #94A3B8;
-  --border-color: rgba(255, 255, 255, 0.05);
-  --border-color-glow: rgba(37, 99, 235, 0.15);
-  --border-color-blue: rgba(157, 178, 206, 0.15);
+  --bg-ink-black: #111244; /* Deep Navy Blue background matching official logo */
+  --bg-obsidian-grey: #0a0b2e; /* Card background */
+  --bg-obsidian-light: #16185c; /* Card hover background */
+  --accent-growth-green: #fa610e; /* Vibrant Brand Orange (Primary Accent) */
+  --accent-growth-green-hover: #e0530b;
+  --accent-growth-green-rgb: 250, 97, 14;
+  --accent-tech-blue: #223381; /* Royal Blue (Secondary Accent) */
+  --accent-tech-blue-hover: #1c2b6e;
+  --accent-tech-blue-rgb: 34, 51, 129;
+  --accent-orange: #fa610e; /* Lighter Blue Accent */
+  --text-light: #f4f1eb;
+  --text-muted: rgba(244, 241, 235, 0.7);
+  --border-color: rgba(244, 241, 235, 0.05);
+  --border-color-glow: rgba(250, 97, 14, 0.15);
+  --border-color-blue: rgba(34, 51, 129, 0.15);
   
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Satoshi', sans-serif;
+  --font-body: 'Satoshi', sans-serif;
   --max-width: 1200px;
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -73,10 +73,10 @@ body {
   -webkit-font-smoothing: antialiased;
   position: relative;
   background-color: var(--bg-ink-black);
-  background-image: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.12) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(157, 178, 206, 0.12) 0px, transparent 50%);
+  background-image: radial-gradient(at 0% 0%, rgba(var(--accent-growth-green-rgb), 0.12) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(var(--accent-tech-blue-rgb), 0.12) 0px, transparent 50%);
   background-attachment: fixed;
   color: #F8FAFC;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
 }
 
 /* Language Switch Display System */
@@ -780,9 +780,9 @@ section {
 
 .btn-primary {
   background: var(--accent-growth-green);
-  color: #03060E;
+  color: var(--bg-ink-black);
   border: 1px solid var(--accent-growth-green);
-  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 4px 20px rgba(var(--accent-growth-green-rgb), 0.25);
   animation: pulse-glow-primary 3s infinite ease-in-out;
 }
 
@@ -791,7 +791,7 @@ section {
   border-color: var(--accent-growth-green-hover);
   transform: scale(1.05);
   filter: brightness(1.25);
-  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.55);
+  box-shadow: 0 8px 30px rgba(var(--accent-growth-green-rgb), 0.55);
 }
 
 .btn-secondary {
@@ -806,7 +806,7 @@ section {
   border-color: var(--accent-tech-blue);
   transform: scale(1.05);
   filter: brightness(1.25);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 8px 30px rgba(var(--accent-tech-blue-rgb), 0.35);
 }
 
 @keyframes pulse-glow-primary {
@@ -1534,13 +1534,13 @@ section {
 }
 
 .audit-spotlight-card {
-  background: linear-gradient(135deg, var(--bg-obsidian-grey) 0%, #121827 100%);
+  background: linear-gradient(135deg, var(--bg-obsidian-grey) 0%, var(--bg-obsidian-light) 100%);
   border: 1px solid var(--border-color-blue);
   border-radius: 24px;
   padding: 4rem;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(59, 130, 246, 0.05);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(var(--accent-tech-blue-rgb), 0.05);
 }
 
 .audit-spotlight-card::before {
@@ -1893,7 +1893,7 @@ select.lead-input {
 
 /* Footer Section */
 footer {
-  background: #010307;
+  background: var(--bg-ink-black);
   border-top: 1px solid var(--border-color);
   padding: 5rem 0;
   text-align: center;
@@ -2058,9 +2058,9 @@ footer {
 .btt-btn:hover {
   background: linear-gradient(135deg, var(--accent-growth-green), var(--accent-orange));
   border-color: var(--accent-growth-green);
-  color: #03060E;
+  color: var(--bg-ink-black);
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 25px rgba(var(--accent-growth-green-rgb), 0.4);
 }
 
 .btt-btn i {
